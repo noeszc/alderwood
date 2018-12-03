@@ -1,0 +1,127 @@
+$backgroundColor: #E0E1E2;
+$hoverBackgroundColor: #CACBCD;
+$activeBackgroundColor: #C0C1C2;
+
+.button {
+  cursor: pointer;
+  display: inline-block;
+  min-height: 1em;
+  outline: none;
+  border: none;
+  vertical-align: baseline;
+  background: $backgroundColor none;
+  color: rgba(0, 0, 0, 0.6);
+  margin: 0em 0.25em 0em 0em;
+  padding: 0.78571429em 1.5em 0.78571429em;
+  text-transform: none;
+  text-shadow: none;
+  font-weight: bold;
+  line-height: 1em;
+  font-style: normal;
+  text-align: center;
+  text-decoration: none;
+  border-radius: 0.28571429rem;
+  box-shadow: 0px 0px 0px 1px transparent inset,
+    0px 0em 0px 0px rgba(34, 36, 38, 0.15) inset;
+  user-select: none;
+  transition: opacity 0.1s ease, background-color 0.1s ease, color 0.1s ease,
+    box-shadow 0.1s ease, background 0.1s ease;
+  will-change: '';
+  -webkit-tap-highlight-color: transparent;
+}
+
+.button {
+  $module: '.button';
+  &:hover {
+    background-color: $hoverBackgroundColor;
+    background-image: none;
+    box-shadow: 0px 0px 0px 1px transparent inset,
+      0px 0em 0px 0px rgba(34, 36, 38, 0.15) inset;
+    color: rgba(0, 0, 0, 0.8);
+    .icon {
+      opacity: 0.85;
+    }
+  }
+
+  &:focus {
+    background-color: $hoverBackgroundColor;
+    color: rgba(0, 0, 0, 0.8);
+    background-image: '' !important;
+    box-shadow: '' !important;
+    .icon {
+      opacity: 0.85;
+    }
+  }
+
+  &--active {
+    background-color: $activeBackgroundColor;
+    background-image: none;
+    box-shadow: 0px 0px 0px 1px transparent inset;
+    color: rgba(0, 0, 0, 0.95);
+    &:hover {
+      background-color: $activeBackgroundColor;
+      background-image: none;
+      color: rgba(0, 0, 0, 0.95);
+    }
+    &:active {
+      background-color: $activeBackgroundColor;
+      background-image: none;
+    }
+  }
+
+  &--loading {
+    position: relative;
+    cursor: default;
+    text-shadow: none !important;
+    color: transparent !important;
+    opacity: 1;
+    pointer-events: auto;
+    transition: all 0s linear, opacity 0.1s ease;
+    &:before,
+    &:after {
+      position: absolute;
+      content: '';
+      top: 50%;
+      left: 50%;
+      margin: -0.64285714em 0em 0em -0.64285714em;
+      width: 1.28571429em;
+      height: 1.28571429em;
+    }
+    &:before {
+      border-radius: 500rem;
+      border: 0.2em solid rgba(0, 0, 0, 0.15);
+    }
+    &:after {
+      animation: button-spin 0.6s linear;
+      animation-iteration-count: infinite;
+      border-radius: 500rem;
+      border-color: #ffffff transparent transparent;
+      border-style: solid;
+      border-width: 0.2em;
+      box-shadow: 0px 0px 0px 1px transparent;
+    }
+  }
+
+  &--disabled,
+  &--disabled#{$module}--active {
+    cursor: default;
+    opacity: 0.45 !important;
+    background-image: none !important;
+    box-shadow: none !important;
+    pointer-events: none !important;
+  }
+
+  &--fluid {
+    display: block;
+    width: 100%;
+  }
+}
+
+@keyframes button-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}

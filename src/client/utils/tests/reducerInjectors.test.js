@@ -1,0 +1,87 @@
+import createHistory from 'history/createBrowserHistory';
+import get from 'lodash/get';
+import configureStore from '../../configureStore';
+import getInjectors, { injectReducerFactory } from '../reducerInjectors';
+// Fixtures
+const initialState = { reduced: 'soon' };
+
+const memoryHistory = createHistory();
+
+const reducer = (state = initialState, action) => {
+  switch (action.type) {
+    case 'TEST':
+      return {
+        ...state,
+        reduced: action.payload,
+      };
+    default:
+      return state;
+  }
+};
+
+describe('reducer injectors', () => {
+  let store;
+  let injectReducer;
+
+  describe('getInjectors', () => {
+    beforeEach(() => {
+      store = get(configureStore({}, memoryHistory), 'store');
+    });
+
+    it('should return injectors', () => {
+      expect(getInjectors(store)).toEqual(
+        expect.objectContaining({
+          injectReducer: expect.any(Function),
+        }),
+      );
+    });
+
+    it('should throw if passed invalid store shape', () => {
+      Reflect.deleteProperty(store, 'dispatch');
+
+      expect(() => getInjectors(store)).toThrow();
+    });
+  });
+
+  describe('injectReducer helper', () => {
+    beforeEach(() => {
+      store = get(configureStore({}, memoryHistory), 'store');
+      injectReducer = injectReducerFactory(store, true);
+    });
+
+    it('should check a store if the second argument is falsy', () => {
+      const inject = injectReducerFactory({});
+
+      expect(() => inject('test', reducer)).toThrow();
+    });
+
+    it('it should not check a store if the second argument is true', () => {
+      Reflect.deleteProperty(store, 'dispatch');
+
+      expect(() => injectReducer('test', reducer)).not.toThrow();
+    });
+
+    it("should validate a reducer and reducer's key", () => {
+      expect(() => injectReducer('', reducer)).toThrow();
+      expect(() => injectReducer(1, reducer)).toThrow();
+      expect(() => injectReducer(1, 1)).toThrow();
+    });
+
+    it('given a store, it should provide a function to inject a reducer', () => {
+      injectReducer('test', reducer);
+
+      const actual = store.getState().test;
+      const expected = initialState;
+
+      expect(actual).toEqual(expected);
+    });
+
+    it('should not assign reducer if already existing', () => {
+      store.replaceReducer = jest.fn();
+      injectReducer('test', reducer);
+      injectReducer('test', reducer);
+
+      expect(store.replaceReducer).toHaveBeenCalledTimes(1);
+    });
+  });
+});

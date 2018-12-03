@@ -1,0 +1,142 @@
+.placeholder {
+    position: static;
+    overflow: hidden;
+    animation: placeholderShimmer 2s linear infinite;
+    animation-iteration-count: infinite;
+    background-color: #ffffff;
+    background-repeat: initial;
+    background-image: linear-gradient( to right, rgba(0, 0, 0, 0.08) 0%, rgba(0, 0, 0, 0.15) 15%, rgba(0, 0, 0, 0.08) 30%);
+    background-size: 1200px 100%;
+    max-width: 30rem;
+}
+
+@keyframes placeholderShimmer {
+    0% {
+        background-position: -1200px 0;
+    }
+    100% {
+        background-position: 1200px 0;
+    }
+}
+
+.placeholder {
+    &+& {
+        margin-top: 2rem;
+    }
+    &+& {
+        animation-delay: 0.15s;
+    }
+    &+&+& {
+        animation-delay: 0.3s;
+    }
+    &+&+&+& {
+        animation-delay: 0.45s;
+    }
+    &+&+&+&+& {
+        animation-delay: 0.60s;
+    }
+    >:before,
+    &__line,
+    &__line:before {
+        background: #ffffff;
+    }
+}
+
+/* Lines */
+
+.placeholder {
+    &__line {
+        position: relative;
+        height: 0.85714286em;
+        &:before,
+        &:after {
+            top: 100%;
+            position: absolute;
+            content: '';
+            background-color: inherit;
+        }
+        &:before {
+            left: 0px;
+        }
+        &:after {
+            right: 0px;
+        }
+    }
+    &__line {
+        margin-bottom: 0.5em;
+        &:before,
+        &:after {
+            height: 0.5em;
+        }
+        &:not(:first-child) {
+            margin-top: 0.5em;
+        }
+    }
+    /* Line outdent */
+    &__line {
+        &:nth-child(1):after {
+            width: 0%;
+        }
+        &:nth-child(2):after {
+            width: 50%;
+        }
+        &:nth-child(3):after {
+            width: 10%;
+        }
+        &:nth-child(4):after {
+            width: 35%;
+        }
+        &:nth-child(5):after {
+            width: 65%;
+        }
+    }
+    /* Sizes */
+    &__line {
+        &#{&}--full:after {
+            width: 0%;
+        }
+        &#{&}--very-long:after {
+            width: 10%;
+        }
+        &#{&}--long:after {
+            width: 35%;
+        }
+        &#{&}--medium:after {
+            width: 50%;
+        }
+        &#{&}--short:after {
+            width: 65%;
+        }
+        &#{&}--very-short:after {
+            width: 80%;
+        }
+    }
+}
+
+/* Image */
+
+.placeholder {
+    &__image {
+        height: 100px;
+        &--square {
+            height: 0px;
+            overflow: hidden;
+            /* 1/1 aspect ratio */
+            padding-top: 100%;
+        }
+        &--rectangular {
+            height: 0px;
+            overflow: hidden;
+            /* 1/1 aspect ratio */
+            padding-top: 75%;
+        }
+    }
+}
+
+/* Fluid */
+
+.placeholder {
+    &--fluid {
+        max-width: none;
+    }
+}

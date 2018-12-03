@@ -1,0 +1,180 @@
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  backface-visibility: hidden;
+  transition: none;
+  will-change: transform;
+  transform: translate3d(0, 0, 0);
+  visibility: hidden;
+  -webkit-overflow-scrolling: touch;
+  height: 100% !important;
+  max-height: 100%;
+  margin: 0 !important;
+  overflow-y: auto;
+  z-index: 102;
+
+  background: #ffffff;
+
+  /* GPU Layers for Child Elements */
+  > * {
+    backface-visibility: hidden;
+  }
+}
+
+/* Direction */
+.sidebar {
+  &--left {
+    right: auto;
+    left: 0;
+    transform: translate3d(-100%, 0, 0);
+  }
+  &--right {
+    right: 0 !important;
+    left: auto !important;
+    transform: translate3d(100%, 0, 0);
+  }
+}
+
+.pushable {
+  height: 100%;
+  overflow-x: hidden;
+  padding: 0em !important;
+
+  &:not(body) {
+    transform: translate3d(0, 0, 0);
+    > .sidebar,
+    > .pusher:after {
+      position: absolute;
+    }
+  }
+  /* Page */
+  > .pusher {
+    position: relative;
+    backface-visibility: hidden;
+    overflow: hidden;
+    min-height: 100%;
+    transition: transform 500ms ease;
+    z-index: 2;
+  }
+  /* Pusher should inherit background from context */
+  > .pusher {
+    background: inherit;
+    /* Dimmer */
+    &:after {
+      position: fixed;
+      top: 0px;
+      right: 0px;
+      content: '';
+      background-color: rgba(0, 0, 0, 0.4);
+      overflow: hidden;
+      opacity: 0;
+      transition: opacity 500ms;
+      will-change: opacity;
+      z-index: 1000;
+    }
+
+    /* Dimmed */
+    &--dimmed:after {
+      width: 100% !important;
+      height: 100% !important;
+      opacity: 1 !important;
+    }
+  }
+}
+
+/* animating */
+.sidebar {
+  &--animating {
+    visibility: visible;
+  }
+}
+
+/* visible */
+.sidebar {
+  &--visible {
+    visibility: visible;
+    transform: translate3d(0, 0, 0);
+  }
+  /* shadow direction */
+  &--left#{&}--visible,
+  &--right#{&}--visible {
+    box-shadow: 0px 0px 20px rgba(34, 36, 38, 0.15);
+  }
+
+  /* visible on load */
+  &--visible#{&}--left ~ .pusher {
+    transform: translate3d(260px, 0, 0);
+  }
+  &--visible#{&}--right ~ .pusher {
+    transform: translate3d(-260px, 0, 0);
+  }
+  /* opposite sides visible forces content overlay */
+  &--visible#{&}--left ~ &--visible#{&}--right ~ .pusher,
+  &--visible#{&}--right ~ &--visible#{&}--left ~ .pusher {
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+/* width */
+.sidebar {
+  /* left / right */
+  &--left,
+  &--right {
+    width: 260px;
+  }
+}
+
+/* animations */
+
+/* overlay */
+/* set-up */
+.sidebar {
+  &--overlay {
+    z-index: 102;
+  }
+  /* inital */
+  &--left#{&}--overlay {
+    transform: translate3d(-100%, 0%, 0);
+  }
+  &--rightt#{&}--overlay {
+    transform: translate3d(100%, 0%, 0);
+  }
+  /* animation */
+  &--animating#{&}--overlay,
+  &--visible#{&}--overlay {
+    transition: transform 500ms ease;
+  }
+  /* end - sidebar */
+  &--visible#{&}--left#{&}--overlay {
+    transform: translate3d(0%, 0%, 0);
+  }
+  &--visible#{&}--right#{&}--overlay {
+    transform: translate3d(0%, 0%, 0);
+  }
+  /* end - pusher */
+  &--visible#{&}--overlay ~ .pusher {
+    transform: none !important;
+  }
+}
+
+/* push */
+
+/* initial */
+.sidebar {
+  &--push {
+    transition: transform 500ms ease;
+    z-index: 102;
+  }
+  /* sidebar - initial */
+  &--left#{&}--push {
+    transform: translate3d(-100%, 0, 0);
+  }
+  &--right#{&}--push {
+    transform: translate3d(100%, 0, 0);
+  }
+  /* end */
+  &--visible#{&}--push {
+    transform: translate3d(0%, 0, 0);
+  }
+}

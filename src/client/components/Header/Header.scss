@@ -1,0 +1,9 @@
+.header {
+  width: 100%;
+  &__inner {
+    display: flex;
+  }
+  &__middle {
+    flex: 1
+  }
+}

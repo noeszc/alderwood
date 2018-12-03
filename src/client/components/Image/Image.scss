@@ -1,0 +1,138 @@
+.image {
+  position: relative;
+  display: inline-block;
+  vertical-align: middle;
+  max-width: 100%;
+  background-color: transparent;
+  svg,
+  img {
+    display: block;
+    max-width: 100%;
+    height: auto;
+  }
+}
+img.img {
+  display: block;
+}
+
+/*******************************
+            States
+*******************************/
+.image {
+  &--hidden {
+    display: none;
+  }
+  &--disabled {
+    cursor: default;
+    opacity: 0.45;
+  }
+}
+
+/*--------------
+     Inline
+---------------*/
+.image {
+  &--inline {
+    display: inline-block;
+    svg,
+    img {
+      display: inline-block;
+    }
+  }
+}
+
+/*------------------
+  Vertical Aligned
+-------------------*/
+.image {
+  &--aligned {
+    display: inline-block;
+    &--top {
+      vertical-align: top;
+      svg,
+      img {
+        vertical-align: top;
+      }
+    }
+    &--middle {
+      vertical-align: middle;
+      svg,
+      img {
+        vertical-align: middle;
+      }
+    }
+    &--bottom {
+      vertical-align: bottom;
+      svg,
+      img {
+        vertical-align: bottom;
+      }
+    }
+  }
+}
+
+/*--------------
+     Circular
+---------------*/
+.image {
+  &--circular {
+    border-radius: 500rem;
+  }
+}
+/*--------------
+     Fluid
+---------------*/
+.image {
+  &--fluid {
+    display: block;
+    width: 100%;
+    height: auto;
+    img,
+    svg {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+  }
+}
+
+/*--------------
+     Avatar
+---------------*/
+.image {
+  &--avatar {
+    margin-right: 0.25em;
+    display: inline-block;
+    width: 2em;
+    height: 2em;
+    border-radius: 500rem;
+    img,
+    svg {
+      margin-right: 0.25em;
+      display: inline-block;
+      width: 2em;
+      height: 2em;
+      border-radius: 500rem;
+    }
+  }
+}
+
+/*-------------------
+       Floated
+--------------------*/
+.image {
+  &--floated {
+    &--right {
+      float: right;
+      margin-right: 0em;
+      margin-bottom: 1em;
+      margin-left: 1em;
+    }
+    &--left {
+      float: left;
+      margin-left: 0em;
+      margin-right: 1em;
+      margin-bottom: 1em;
+    }
+  }
+}

@@ -1,0 +1,235 @@
+@import '~include-media/dist/_include-media.scss';
+
+$module: '.modal';
+
+.modal {
+  position: absolute;
+  display: none;
+  z-index: 1001;
+  text-align: left;
+  background: #ffffff;
+  box-shadow: 1px 3px 3px 0px rgba(0, 0, 0, 0.2),
+    1px 3px 15px 2px rgba(0, 0, 0, 0.2);
+  transform-origin: 50% 25%;
+  flex: 0 0 auto;
+  user-select: text;
+  will-change: top, left, margin, transform, opacity;
+  font-size: 1rem;
+  &--active {
+    display: block;
+  }
+
+  &--scrolling {
+    margin: 1rem auto;
+  }
+}
+
+/*--------------
+     Close
+---------------*/
+
+.modal {
+  &__close {
+    cursor: pointer;
+    position: absolute;
+    /* top: -2.5rem;
+    right: -2.5rem; */
+    top: 1.0535rem;
+    right: 1rem;
+    color: rgba(0, 0, 0, 0.87);
+    z-index: 1;
+    opacity: 0.8;
+    font-size: 1.25em;
+    padding: 0.25rem 0rem 0rem 0rem;
+    /*  width: 2.25rem;
+    height: 2.25rem;
+     */
+    &:hover {
+      opacity: 1;
+    }
+  }
+}
+/*--------------
+     Header
+---------------*/
+.modal {
+  &__header {
+    display: block;
+    margin: 0em;
+    padding: 1.25rem 2.25rem 1.25rem 1.5rem;
+    color: rgba(0, 0, 0, 0.85);
+    border-bottom: 1px solid rgba(34, 36, 38, 0.15);
+  }
+}
+
+/*--------------
+     Content
+---------------*/
+.modal {
+  &__content {
+    display: block;
+    width: 100%;
+    font-size: 1em;
+    line-height: 1.4;
+    padding: 1.5rem;
+    background: #ffffff;
+    &--image {
+      display: flex;
+      flex-direction: row;
+    }
+  }
+}
+/*--------------
+   Description
+---------------*/
+.modal {
+  &__description {
+    display: block;
+  }
+}
+
+/*--------------
+     Actions
+---------------*/
+.modal {
+  &__actions {
+    background: #f9fafb;
+    padding: 1rem 1rem;
+    border-top: 1px solid rgba(34, 36, 38, 0.15);
+    text-align: right;
+    > .button {
+      margin-left: 0.75em;
+    }
+  }
+}
+
+/*-------------------
+       Responsive
+--------------------*/
+
+/* Modal Width */
+.modal {
+  @include media('<tablet') {
+    width: 95%;
+    margin: 0;
+  }
+  @include media('>tablet') {
+    width: 88%;
+    margin: 0;
+  }
+  @include media('>desktop') {
+    width: 850px;
+    margin: 0;
+  }
+}
+
+/*--------------
+      Types
+---------------*/
+.modal {
+  &--basic {
+    background-color: transparent;
+    border: none;
+    box-shadow: none;
+    color: #ffffff;
+    > #{$module}__header,
+    > #{$module}__content,
+    > #{$module}__actions {
+      background-color: transparent;
+    }
+    > #{$module}__header,
+    > #{$module}__close {
+      color: #ffffff;
+    }
+  }
+}
+
+/*--------------
+      Size
+---------------*/
+.modal {
+  font-size: 1rem;
+  /* Full Screen  */
+  &--fullscreen {
+    width: 95%!important;
+    margin: 1em auto;
+    > #{$module}__header {
+      padding-right: 2.25rem;
+    }
+    > #{$module}__close {
+      top: 1.0535rem;
+      right: 1rem;
+      color: rgba(0, 0, 0, 0.87);
+    }
+  }
+  /* Mini */
+  &--mini {
+    #{$module}__header {
+      font-size: 1.3em;
+    }
+    @include media('>phone', '<=tablet') {
+      width: 95%;
+      margin: 0em 0em 0em 0em;
+    }
+    @include media('>tablet') {
+      width: 340px;
+      margin: 0em 0em 0em 0em;
+    }
+    @include media('>desktop') {
+      width: 380px;
+      margin: 0em 0em 0em 0em;
+    }
+  }
+
+  /* Tiny */
+  &--tiny {
+    @include media('<tablet') {
+      width: 95%;
+      margin: 0;
+    }
+    @include media('>tablet') {
+      width: 52.8%;
+      margin: 0;
+    }
+    @include media('>desktop') {
+      width: 510px;
+      margin: 0;
+    }
+  }
+  /* Small */
+  &--small {
+    #{$module}__header {
+      font-size: 1.3em;
+    }
+    @include media('<tablet') {
+      width: 95%;
+      margin: 0;
+    }
+    @include media('>tablet') {
+      width: 70.4%;
+      margin: 0;
+    }
+    @include media('>desktop') {
+      width: 680px;
+      margin: 0;
+    }
+  }
+  /* Large */
+  &--large {
+    #{$module}__header {
+      font-size: 1.6em;
+    }
+    @include media('<tablet') {
+      width: 95%;
+      margin: 0;
+    }
+    @include media('>tablet') {
+      width: 88%;
+      margin: 0;
+    }
+    @include media('>desktop') {
+      width: 1020px;
+      margin: 0;
+    }
+  }
+}
