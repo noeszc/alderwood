@@ -1,3 +1,5 @@
+[![Coverage Status](https://coveralls.io/repos/github/noeszc/alderwood/badge.svg?branch=develop)](https://coveralls.io/github/noeszc/alderwood?branch=develop)
+
 ## Quick Start
 
 1. Tener instalado [node](https://nodejs.org/es/download/) v8 o superior, es recomendable instalar a travez de [nvm](https://github.com/creationix/nvm).
